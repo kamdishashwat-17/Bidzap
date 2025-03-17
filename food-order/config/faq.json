@@ -1,0 +1,66 @@
+[
+    {
+        "question": "What is Bidzap?",
+        "answer": "Bidzap is a smart food ordering system that helps users order food online easily."
+    },
+    {
+        "question": "How can I place an order?",
+        "answer": "To place an order, simply browse the menu, add items to your cart, and proceed to checkout."
+    },
+    {
+        "question": "What payment methods are accepted?",
+        "answer": "We accept credit cards, debit cards, UPI, and cash on delivery."
+    },
+    {
+        "question": "Can I cancel my order after placing it?",
+        "answer": "Yes, you can cancel your order within 5 minutes of placing it. After that, cancellation is subject to restaurant policies."
+    },
+    {
+        "question": "How long does delivery take?",
+        "answer": "Delivery time depends on your location and the restaurant. It usually takes between 30-45 minutes."
+    },
+    {
+        "question": "Is there a delivery fee?",
+        "answer": "Some restaurants may charge a delivery fee. You can check the fee at checkout before placing the order."
+    },
+    {
+        "question": "Do you offer discounts or promo codes?",
+        "answer": "Yes! We frequently offer discounts and promo codes. Check our promotions section for the latest offers."
+    },
+    {
+        "question": "Can I track my order?",
+        "answer": "Yes, you can track your order in real-time from the 'My Orders' section in your account."
+    },
+    {
+        "question": "What happens if my food is delivered late?",
+        "answer": "If your order is delayed, we will notify you. If it takes too long, you may be eligible for a refund or discount."
+    },
+    {
+        "question": "How do I contact customer support?",
+        "answer": "You can contact our support team via email at support@bidzap.com or call us at +91 98765 43210."
+    },
+    {
+        "question": "How do I get a refund?",
+        "answer": "If you are eligible for a refund, it will be processed within 5-7 business days. Contact support for assistance."
+    },
+    {
+        "question": "Do you deliver to my location?",
+        "answer": "Delivery is available in selected cities. Enter your address in the app to check availability."
+    },
+    {
+        "question": "What is the estimated delivery time?",
+        "answer": "The estimated delivery time depends on your location and restaurant. It typically ranges from 30-45 minutes."
+    },
+    {
+        "question": "How do I create an account?",
+        "answer": "To create an account, click 'Sign Up' on the homepage, enter your details, and verify your email or phone number."
+    },
+    {
+        "question": "What if there is a problem with my order?",
+        "answer": "If there is an issue with your order, please contact customer support immediately for a resolution."
+    },
+    {
+        "question": "Can I order for someone else?",
+        "answer": "Yes, you can place an order for someone else. Just enter their delivery details at checkout."
+    }
+]
