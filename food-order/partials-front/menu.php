@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bidzap</title>
@@ -39,7 +40,10 @@
                     <li>
                         <a href="<?php echo SITEURL; ?>foods.php">Foods</a>
                     </li>
-                    <li>            
+                    <li>
+                        <a href="cart.php">Cart</a> <!-- ✅ ADDED CART HERE -->
+                    </li>
+                    <li>
                         <?php
                         if(empty($_SESSION["u_id"])) {
                             echo '<a href="login.php" class="nav-link active">Login</a>';

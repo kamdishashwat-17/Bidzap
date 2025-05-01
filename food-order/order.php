@@ -1,4 +1,3 @@
-
 <?php include('partials-front/menu.php'); ?>
 
 <?php 
@@ -87,6 +86,16 @@
                 <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
             </fieldset>
 
+            <!-- Add to Cart Button -->
+            <fieldset>
+                <form method="post" action="cart.php">
+                    <input type="hidden" name="food_id" value="<?php echo $food_id; ?>">
+                    <input type="hidden" name="food_name" value="<?php echo $title; ?>">
+                    <input type="hidden" name="price" value="<?php echo $price; ?>">
+                    <input type="hidden" name="qty" value="1"> <!-- Default quantity -->
+                    <button type="submit" name="add_to_cart" class="btn btn-secondary">Add to Cart</button>
+                </form>
+            </fieldset>
         </form>
 
         <?php 
@@ -95,58 +104,54 @@
             if(isset($_POST['submit']))
             {
                 if(empty($_SESSION["u_id"]))
-{
-header('location:login.php');
-}
-else{
-  // Get all the details from the form
+                {
+                    header('location:login.php');
+                }
+                else
+                {
+                    // Get all the details from the form
 
-  $food = $_POST['food'];
-  $price = $_POST['price'];
-  $qty = $_POST['qty'];
+                    $food = $_POST['food'];
+                    $price = $_POST['price'];
+                    $qty = $_POST['qty'];
 
-  $total = $price * $qty; // total = price x qty 
+                    $total = $price * $qty; // total = price x qty 
 
-  $order_date = date("Y-m-d h:i:sa"); //Order DAte
+                    //$order_date = date("Y-m-d h:i:sa"); //Order DAte
+                    $order_date = date("Y-m-d H:i:s"); // Correct format: 24-hour, no am/pm
+                    $status = "Ordered";  // Ordered, On Delivery, Delivered, Cancelled
+                    $u_id=$_SESSION["u_id"];
+                    
+                    //Save the Order in Databaase
+                    //Create SQL to save the data
+                    $sql2 = "INSERT INTO tbl_order SET 
+                        food = '$food',
+                        price = $price,
+                        qty = $qty,
+                        total = $total,
+                        order_date = '$order_date',
+                        status = '$status',
+                        u_id='$u_id'
+                    ";
 
-  $status = "Ordered";  // Ordered, On Delivery, Delivered, Cancelled
-  $u_id=$_SESSION["u_id"];
-  
+                    //Execute the Query
+                    $res2 = mysqli_query($conn, $sql2);
 
-
-
-  //Save the Order in Databaase
-  //Create SQL to save the data
-  $sql2 = "INSERT INTO tbl_order SET 
-      food = '$food',
-      price = $price,
-      qty = $qty,
-      total = $total,
-      order_date = '$order_date',
-      status = '$status',
-      u_id='$u_id'
-       ";
-
-  //echo $sql2; die();
-
-  //Execute the Query
-  $res2 = mysqli_query($conn, $sql2);
-
-  //Check whether query executed successfully or not
-  if($res2==true)
-  {
-      //Query Executed and Order Saved
-      
-      $_SESSION['order'] = "<div class='success text-center'>Food Ordered Successfully.</div>";
-      header('location:'.SITEURL);
-  }
-  else
-  {
-      //Failed to Save Order
-      $_SESSION['order'] = "<div class='error text-center'>Failed to Order Food.</div>";
-      header('location:'.SITEURL);
-  }
-}
+                    //Check whether query executed successfully or not
+                    if($res2==true)
+                    {
+                        //Query Executed and Order Saved
+                        
+                        $_SESSION['order'] = "<div class='success text-center'>Food Ordered Successfully.</div>";
+                        header('location:'.SITEURL);
+                    }
+                    else
+                    {
+                        //Failed to Save Order
+                        $_SESSION['order'] = "<div class='error text-center'>Failed to Order Food.</div>";
+                        header('location:'.SITEURL);
+                    }
+                }
             }
         ?>
 
