@@ -48,8 +48,8 @@
                         if(empty($_SESSION["u_id"])) {
                             echo '<a href="login.php" class="nav-link active">Login</a>';
                         } else {
-                            echo '<a href="myorders.php" class="nav-link active">Myorders</a>';
-                            echo '<a href="logout.php" class="nav-link active">Logout</a>';
+                            echo '<a href="myorders.php" class="nav-link active"> Myorders</a>';
+                            echo '<a href="logout.php" class="nav-link active">   Logout</a>';
                         }
                         ?>
                     </li>

@@ -65,28 +65,41 @@ if (isset($_POST['order_now'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cart | Bidzap</title>
+    <title>Cart | Food Order</title>
     <meta charset="UTF-8">
     <style>
         body {
-            font-family: Arial;
-            background: #f9f9f9;
-            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333333;
+            text-align: center;
+            margin-bottom: 20px;
         }
         .food-item {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .food-item:last-child {
+            border-bottom: none;
+        }
+        .food-item span {
+            font-size: 16px;
+            color: #555555;
         }
         .food-item form {
             margin: 0;
@@ -96,51 +109,67 @@ if (isset($_POST['order_now'])) {
             background: #ff4757;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
         .food-item button:hover {
             background: #e84118;
         }
-        h2, h3 {
-            color: #2f3542;
-        }
         ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
         ul li {
-            padding: 6px 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #555555;
         }
         .order-button {
+            display: block;
+            width: 100%;
             background: #2ed573;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 0;
+            font-size: 18px;
             color: white;
             border: none;
-            margin-top: 15px;
             border-radius: 5px;
             cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            transition: background 0.3s ease;
         }
         .order-button:hover {
             background: #27ae60;
         }
         .success {
             color: green;
-            margin-top: 15px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
         }
         .remove-btn {
             background: #ff6b81;
             border: none;
             border-radius: 50%;
             padding: 5px 10px;
-            margin-left: 10px;
             font-weight: bold;
+            color: white;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
         .remove-btn:hover {
             background: #ff4757;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            text-align: right;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -171,12 +200,12 @@ if (isset($_POST['order_now'])) {
                         <?php echo $item['name']; ?> - ₹<?php echo $item['price']; ?>
                         <form method="post" style="display:inline;">
                             <input type="hidden" name="remove_id" value="<?php echo $item['id']; ?>">
-                            <button type="submit" name="remove_item" class="remove-btn">–</button>
+                            <button type="submit" name="remove_item" class="remove-btn"> - </button>
                         </form>
                     </li>
                 <?php endforeach; ?>
             </ul>
-            <p><strong>Total:</strong> ₹<?php echo $total; ?></p>
+            <p class="total"><strong>Total:</strong> ₹<?php echo $total; ?></p>
             <form method="post">
                 <button type="submit" class="order-button" name="order_now">Order Now</button>
             </form>
