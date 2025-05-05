@@ -153,3 +153,99 @@ if (isset($_SESSION['add_to_cart_success'])) {
 <!-- fOOD Menu Section Ends Here -->
 
 <?php include('partials-front/footer.php'); ?>
+
+<!-- Chatbot Section Starts Here -->
+<div id="chat-container" style="display: none;">
+    <div id="chat-header" style="background: linear-gradient(to right, #ff7e5f, #feb47b); color: white;">
+        <h2>ZapBot</h2>
+    </div>
+    <div id="chat-box" style="background: #f9f9f9;"></div>
+</div>
+<!-- Chatbot Section Ends Here -->
+
+<style>
+    #chat-container {
+        width: 300px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #ffffff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    #chat-box {
+        height: 200px;
+        overflow-y: auto;
+        padding: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+    .message {
+        margin: 5px 0;
+    }
+    .message.bot {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        padding: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .message.answer {
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        color: white;
+        padding: 5px;
+        border-radius: 10px;
+        margin-left: 20px;
+    }
+</style>
+
+<script>
+    function toggleChatbot() {
+        const chatContainer = document.getElementById('chat-container');
+        if (chatContainer.style.display === 'none') {
+            chatContainer.style.display = 'block';
+            loadFAQ();
+            displayWelcomeMessage();
+        } else {
+            chatContainer.style.display = 'none';
+        }
+    }
+
+    function loadFAQ() {
+        fetch('config/faq.json')
+            .then(response => response.json())
+            .then(data => {
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML = ''; // Clear previous messages
+                data.forEach(faq => {
+                    const question = document.createElement('div');
+                    question.className = 'message bot';
+                    question.textContent = faq.question;
+                    question.onclick = () => displayAnswer(question, faq.answer);
+                    chatBox.appendChild(question);
+                });
+            });
+    }
+
+    function displayWelcomeMessage() {
+        const chatBox = document.getElementById('chat-box');
+        const welcomeMessage = document.createElement('div');
+        welcomeMessage.className = 'message bot';
+        welcomeMessage.textContent = 'Hi, I am here to assist you!';
+        chatBox.appendChild(welcomeMessage);
+    }
+
+    function displayAnswer(questionElement, answer) {
+        const answerMessage = document.createElement('div');
+        answerMessage.className = 'message answer';
+        answerMessage.textContent = answer;
+        questionElement.insertAdjacentElement('afterend', answerMessage);
+        const chatBox = document.getElementById('chat-box');
+        // chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+
+    document.getElementById('bot').addEventListener('click', toggleChatbot);
+</script>
+</body>
+</html>
