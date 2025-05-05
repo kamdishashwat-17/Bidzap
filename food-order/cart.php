@@ -56,8 +56,25 @@ if (isset($_POST['remove_item'])) {
 // Place order logic
 if (isset($_POST['order_now'])) {
     if (!empty($_SESSION['cart'])) {
-        $_SESSION['order_success'] = "Order placed successfully!";
+        // Loop through the cart items and insert them into the database
+        foreach ($_SESSION['cart'] as $item) {
+            $food = $item['name'];
+            $price = $item['price'];
+            $qty = 1; // Default quantity
+            $total = $price * $qty;
+            $order_date = date("Y-m-d H:i:s");
+            $status = "Ordered"; // Default status
+            $u_id = $_SESSION['u_id']; // Assuming user ID is stored in session
+
+            // Insert the order into the database
+            $sql = "INSERT INTO tbl_order (food, price, qty, total, order_date, status, u_id) 
+                    VALUES ('$food', $price, $qty, $total, '$order_date', '$status', $u_id)";
+            mysqli_query($conn, $sql);
+        }
+
+        // Clear the cart after placing the order
         $_SESSION['cart'] = [];
+        $_SESSION['order_success'] = "Order placed successfully!";
     }
 }
 ?>
@@ -70,14 +87,15 @@ if (isset($_POST['order_now'])) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f4f9;
+            background: url('https://t4.ftcdn.net/jpg/02/94/21/87/360_F_294218701_se4mQtVmQoPnG4UX7J8PjvTzn8yeWyqF.jpg') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
         }
         .container {
             max-width: 900px;
             margin: 50px auto;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
             padding: 20px 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
